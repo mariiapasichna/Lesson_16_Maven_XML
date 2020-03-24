@@ -41,6 +41,9 @@ There are 2 different transformations, "--...-." and "--...--.".
     }
 
     private static int uniqueMorseRepresentations(String[] words) {
+        if (words == null) {
+            return 0;
+        }
         Set<String> set = new HashSet<>();
         Map<Character, String> map = new TreeMap<>();
         for (int i = 0; i < ALPHABET.length(); i++) {
