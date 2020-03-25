@@ -33,8 +33,13 @@ There are 2 different transformations, "--...-." and "--...--.".
 */
 
     public static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
-    public static final String[] MORSE_CODE = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."};
-
+    public static final String[] MORSE = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."};
+    public static final Map<Character, String> MORSE_CODE = new TreeMap<>();
+    static {
+        for (int i = 0; i < ALPHABET.length(); i++) {
+            MORSE_CODE.put(ALPHABET.charAt(i), MORSE[i]);
+        }
+    }
     public static void main(String[] args) {
         String[] words = {"gin", "zen", "gig", "msg"};
         System.out.println(uniqueMorseRepresentations(words));
@@ -45,15 +50,11 @@ There are 2 different transformations, "--...-." and "--...--.".
             return 0;
         }
         Set<String> set = new HashSet<>();
-        Map<Character, String> map = new TreeMap<>();
-        for (int i = 0; i < ALPHABET.length(); i++) {
-            map.put(ALPHABET.charAt(i), MORSE_CODE[i]);
-        }
         for (int i = 0; i < words.length; i++) {
             char[] word = words[i].toCharArray();
             StringBuilder stringBuilder = new StringBuilder(word.length);
             for (char ch : word) {
-                stringBuilder.append(map.get(ch));
+                stringBuilder.append(MORSE_CODE.get(ch));
             }
             set.add(stringBuilder.toString());
         }
